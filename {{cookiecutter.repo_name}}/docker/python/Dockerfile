@@ -83,6 +83,7 @@ RUN <<EOF bash
         libmemcached11 libpcre3 \
         sudo ca-certificates \
         nginx \
+        gettext \
         tzdata
 EOF
 
