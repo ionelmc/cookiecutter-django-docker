@@ -4,7 +4,7 @@ services:
       context: docker/requirements
     volumes:
       - ./requirements:/requirements
-      - ./.home:/home/app
+      - ./.home/requirements:/home/app
     env_file:
       - .env-test
 
