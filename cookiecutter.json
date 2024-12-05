@@ -46,7 +46,7 @@
   "_setuptools_version": "75.6.0",
   "_ubuntu_release": "noble",
   "_ubuntu_version": "24.04",
-  "_uv_version": "0.5.4",
+  "_uv_version": "0.5.6",
   "django_version": "latest",
   "dockerfile_version": "latest",
   "memcached_version": "latest",
@@ -71,7 +71,7 @@
     "setuptools_version": "setuptools_version (latest=75.6.0)",
     "ubuntu_release": "ubuntu_release (latest=noble)",
     "ubuntu_version": "ubuntu_version (latest=24.04)",
-    "uv_version": "uv_version (latest=0.5.4)"
+    "uv_version": "uv_version (latest=0.5.6)"
   },
   "__django_version": "{{ cookiecutter._django_version if cookiecutter.django_version == 'latest' else cookiecutter.django_version }}",
   "__dockerfile_version": "{{ cookiecutter._dockerfile_version if cookiecutter.dockerfile_version == 'latest' else cookiecutter.dockerfile_version }}",
