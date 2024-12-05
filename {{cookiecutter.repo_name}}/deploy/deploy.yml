@@ -80,12 +80,14 @@
       shell:
         executable: /bin/bash
         cmd: |
+          exec > >(tee -a /services/deploy.log) 2>&1
           set -euxo pipefail
           docker compose run --rm --no-TTY {{ service_name }} pysu app django-admin migrate --no-input
     - name: run collectstatic
       shell:
         executable: /bin/bash
         cmd: |
+          exec > >(tee -a /services/deploy.log) 2>&1
           set -euxo pipefail
           docker compose run --rm --no-TTY {{ service_name }} pysu app django-admin collectstatic --noinput --clear -v0
     - name: restart services
