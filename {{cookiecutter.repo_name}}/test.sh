@@ -57,7 +57,7 @@ if [[ -z "$(find requirements -maxdepth 1 -name '*.txt' -print -quit)" ]] || [[ 
     docker compose build $BUILD_ARGS requirements
     mkdir -p .home/requirements
     chown -R $USER_ID .home/requirements
-    docker compose run --rm requirements
+    docker compose run --rm --user=$USER_ID requirements
     if [[ "$*" == "requirements" ]]; then
         exit
     fi
