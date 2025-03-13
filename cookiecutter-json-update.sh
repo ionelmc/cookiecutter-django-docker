@@ -21,8 +21,7 @@ update_field postgresql_version "$(grep -oP '(?<="_postgresql_version": ")(.*)(?
 update_field python_version "$(grep -oP '(?<="_python_version": ")(.*)(?=")' cookiecutter.json)"
 update_field redis_version "$(grep -oP '(?<="_redis_version": ")(.*)(?=")' cookiecutter.json)"
 update_field setuptools_version "$(grep -oP '(?<=setuptools==).*' cookiecutter-packages.txt)"
-update_field ubuntu_release "$(grep -oP '(?<="_ubuntu_release": ")(.*)(?=")' cookiecutter.json)"
-update_field ubuntu_version "$(grep -oP '(?<="_ubuntu_version": ")(.*)(?=")' cookiecutter.json)"
+update_field debian_release "$(grep -oP '(?<="_debian_release": ")(.*)(?=")' cookiecutter.json)"
 update_field uv_version "$(grep -oP '(?<=uv==).*' cookiecutter-packages.txt)"
 
 

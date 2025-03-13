@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:{{ cookiecutter.__dockerfile_version }}
-FROM ubuntu:{{ cookiecutter.__ubuntu_version }}
+FROM python:{{ cookiecutter.__python_version }}-slim-{{ cookiecutter.__debian_release }}
 
-# Note: this uses ubuntu as the base instead of a more lightweight image
+# Note: this uses python (debian) as the base instead of a more lightweight image
 # like alpine because fswatch ain't in alpine and we want to use it instead
 # of inotifywait which only supports Linux
 # (iow: to support Docker for Windows and other setups with strange storage)

@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:{{ cookiecutter.__dockerfile_version }}
-FROM buildpack-deps:{{ cookiecutter.__ubuntu_version }}-scm as deps
+FROM python:{{ cookiecutter.__python_version }}-{{ cookiecutter.__debian_release }}
 
 ARG TZ=UTC
 
@@ -9,7 +9,7 @@ RUN <<EOF bash
     set -euxo pipefail
     export DEBIAN_FRONTEND=noninteractive
 
-    echo "deb http://apt.postgresql.org/pub/repos/apt {{ cookiecutter.__ubuntu_release }}-pgdg main {{ cookiecutter.__postgresql_version.split('.')|first }}" > /etc/apt/sources.list.d/pgdg.list
+    echo "deb http://apt.postgresql.org/pub/repos/apt {{ cookiecutter.__debian_release }}-pgdg main {{ cookiecutter.__postgresql_version.split('.')|first }}" > /etc/apt/sources.list.d/pgdg.list
     curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/apt.postgresql.org.gpg
     apt-get update
     apt-get install -y --no-install-recommends \
@@ -26,11 +26,7 @@ EOF
 RUN <<EOF bash
     set -euxo pipefail
     curl -fsSL 'https://bootstrap.pypa.io/get-pip.py' | python - --no-cache --disable-pip-version-check --upgrade --break-system-packages \
-{%- if cookiecutter.uv_enabled %}
     uv=={{ cookiecutter.__uv_version }}
-{%- else %}
-    pip=={{ cookiecutter.__pip_version }} setuptools=={{ cookiecutter.__setuptools_version }} pip-tools=={{ cookiecutter.__pip_tools_version }}
-{%- endif %}
 EOF
 
 ENV CPUCOUNT=1
@@ -38,8 +34,6 @@ ARG USER_ID=1000
 ARG GROUP_ID=1000
 RUN <<EOF bash
     set -eux
-    # clear leftover user that the 24.04 image has
-    userdel ubuntu || true
     groupadd --gid $GROUP_ID app
     useradd --uid $USER_ID --gid $GROUP_ID --shell /bin/bash --create-home app
     echo "app ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers

@@ -2,7 +2,7 @@
 extend-exclude = ["static"]
 line-length = 140
 src = ["src", "tests"]
-target-version = "{{ cookiecutter.__python_version }}"
+target-version = "py{{ cookiecutter.__python_version.replace('.', '') }}"
 
 [tool.ruff.lint.per-file-ignores]
 "src/tests/*" = ["DTZ", "S", "B"]
