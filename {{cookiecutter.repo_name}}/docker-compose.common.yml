@@ -13,21 +13,40 @@ services:
   pg:
     build:
       context: docker/postgres
+    shm_size: 4g
     command: [
-      "postgres",
-      "-c", "log_statement=all",
-      "-c", "log_duration=true",
-      "-c", "log_lock_waits=true",
-      "-c", "log_min_error_statement=WARNING",
-      "-c", "log_min_duration_statement=1s",
-      "-c", "log_connections=true",
-      "-c", "log_disconnections=true",
-      "-c", "max_connections=25",
-      "-c", "listen_addresses=*",
+      'postgres',
+      '-c', 'log_lock_waits=true',
+      '-c', 'log_min_error_statement=WARNING',
+      '-c', 'log_min_duration_statement=1s',
+
+      # debug
+#      '-c', 'log_statement=all',
+#      '-c', 'log_duration=true',
+#      '-c', 'log_disconnections=true',
+#      '-c', 'log_connections=true',
+
+      # tuning
+      '-c', 'max_wal_size=10GB',
+      '-c', 'work_mem=4GB',
+      '-c', 'checkpoint_timeout=1h',
+      '-c', 'shared_buffers=1GB',
+      '-c', 'autovacuum=false',
+      '-c', 'maintenance_work_mem=1GB',
+
+      # danger
+#      '-c', 'full_page_writes=off',
+#      '-c', 'wal_level=minimal',
+#      '-c', 'max_wal_senders=0',
+#      '-c', 'fsync=off',
+#      '-c', 'synchronous_commit=off',
     ]
-    volumes:
-      - ./.home:/root
-      - .:/app
+
+  pgupgrade:
+    image: pgautoupgrade/pgautoupgrade:{{ cookiecutter.__postgresql_version }}-{{ cookiecutter.__debian_release }}
+    environment:
+      POSTGRES_PASSWORD: app
+      PGAUTO_ONESHOT: yes
 
   python:
     build:

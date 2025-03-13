@@ -10,10 +10,13 @@ services:
       file: docker-compose.common.yml
     env_file:
       - .env
-    environment:
-      PGDATA: /root/pg
     ports:
       - 5432:5432
+    environment:
+      PGDATA: /root/pg
+    volumes:
+      - .:/app
+      - ./.home:/root
 
   mc:
     extends:
