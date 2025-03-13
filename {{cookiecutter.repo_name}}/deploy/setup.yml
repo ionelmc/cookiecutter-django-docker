@@ -9,6 +9,7 @@
           app_version: '{{ app_version }}'
           compose_file: '{{ compose_file }}'
           lsb: '{{ ansible_lsb.codename }}'
+          host: '{{ ansible_host }}'
       debug:
         var: msg
     - name: 'checking dirs'
