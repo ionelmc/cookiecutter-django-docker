@@ -13,8 +13,6 @@ RUN <<EOF bash
     curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/apt.postgresql.org.gpg
     apt-get update
     apt-get install -y --no-install-recommends \
-        python3-dev \
-        python-is-python3 \
         libpq-dev={{ cookiecutter.__postgresql_version.split('.')|first }}.* libpq5={{ cookiecutter.__postgresql_version.split('.')|first }}.* \
         libgdal-dev \
         libtiff-dev libjpeg-dev libzip-dev libfreetype-dev \
