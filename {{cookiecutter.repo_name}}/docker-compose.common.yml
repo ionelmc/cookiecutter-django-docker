@@ -72,6 +72,8 @@ services:
       resources:
         limits:
           memory: ${MEMORY_LIMIT:-4G}
+    cap_add:
+      - SYS_PTRACE
     ulimits:
       nproc: 16384
       nofile:
