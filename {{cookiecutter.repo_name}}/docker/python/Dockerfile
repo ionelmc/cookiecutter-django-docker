@@ -45,9 +45,11 @@ EOF
 FROM python:{{ cookiecutter.__python_version }}-{{ cookiecutter.__debian_release }} as certs
 ##################################
 ARG SERVER_NAME="localhost"
+
+# We are using the certbot naming convertion for these files.
 RUN mkdir /certs \
  && openssl req -x509 -nodes -newkey rsa:4096 -sha256 \
-                -out /certs/fullchain.pem -keyout /certs/privkey.pem \
+                -out /certs/cert.pem -keyout /certs/privkey.pem \
                 -subj "/CN=$SERVER_NAME"
 
 #################
@@ -169,7 +171,8 @@ RUN <<EOF bash
     set -euxo pipefail
     envsubst '\$SERVER_NAME' < /etc/app-latest/nginx.site | sponge /etc/app-latest/nginx.site
 EOF
-RUN cp /etc/app-defaults/fullchain.pem /etc/app-defaults/chain.pem \
+RUN ln -s cert.pem /etc/app-defaults/chain.pem \
+ && ln -s cert.pem /etc/app-defaults/fullchain.pem \
  && ln -sf /etc/app/nginx.conf /etc/nginx/nginx.conf \
  && cp /etc/nginx/mime.types /etc/app-latest \
  && chmod -R go+r /etc/app
