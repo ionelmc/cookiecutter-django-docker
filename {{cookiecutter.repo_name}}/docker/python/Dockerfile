@@ -47,7 +47,7 @@ FROM python:{{ cookiecutter.__python_version }}-{{ cookiecutter.__debian_release
 ARG SERVER_NAME="localhost"
 RUN mkdir /certs \
  && openssl req -x509 -nodes -newkey rsa:4096 -sha256 \
-                -out /certs/cert.pem -keyout /certs/secret.pem \
+                -out /certs/fullchain.pem -keyout /certs/privkey.pem \
                 -subj "/CN=$SERVER_NAME"
 
 #################
@@ -169,7 +169,7 @@ RUN <<EOF bash
     set -euxo pipefail
     envsubst '\$SERVER_NAME' < /etc/app-latest/nginx.site | sponge /etc/app-latest/nginx.site
 EOF
-RUN cp /etc/app-defaults/cert.pem /etc/app-defaults/chain.pem \
+RUN cp /etc/app-defaults/fullchain.pem /etc/app-defaults/chain.pem \
  && ln -sf /etc/app/nginx.conf /etc/nginx/nginx.conf \
  && cp /etc/nginx/mime.types /etc/app-latest \
  && chmod -R go+r /etc/app
