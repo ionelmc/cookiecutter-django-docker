@@ -10,8 +10,8 @@ server {
     server_name $SERVER_NAME;
     server_name_in_redirect on;
 
-    ssl_certificate /shared/$SERVER_NAME/etc/fullchain.pem;
-    ssl_certificate_key /shared/$SERVER_NAME/etc/privkey.pem;
+    ssl_certificate /shared/$SERVER_NAME/etc/chain.pem;
+    ssl_certificate_key /shared/$SERVER_NAME/etc/secret.pem;
 
     ssl_session_timeout 1d;
     ssl_session_cache shared:MozSSL:10m;  # about 40000 sessions
