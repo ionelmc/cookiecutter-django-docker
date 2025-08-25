@@ -15,7 +15,7 @@ RUN <<EOF bash
         libgdal-dev \
         libtiff-dev libjpeg-dev libzip-dev libfreetype-dev \
         libwebp-dev tcl-dev tk-dev libffi-dev \
-        libmemcached-dev zlib1g-dev libpcre3-dev \
+        zlib1g-dev libpcre3-dev \
         build-essential git sudo ca-certificates
 EOF
 RUN <<EOF bash
@@ -77,7 +77,7 @@ RUN <<EOF bash
         graphviz \
         dumb-init \
         libpq5={{ cookiecutter.__postgresql_version.split('.')|first }}.* postgresql-client-{{ cookiecutter.__postgresql_version.split('.')|first }} \
-        libmemcached11 libpcre3 \
+        libpcre3 \
         sudo ca-certificates \
         nginx \
         gettext \

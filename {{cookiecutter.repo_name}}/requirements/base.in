@@ -4,7 +4,6 @@ django
 attrs
 django-admin-utils
 django-crispy-forms
-django-pylibmc
 django-settings-export
 httpx
 lazy_object_proxy
@@ -14,7 +13,7 @@ tzdata
 
 # connectors
 psycopg[c]
-pylibmc
+pymemcache
 
 # container tooling
 holdup

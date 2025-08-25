@@ -24,12 +24,17 @@ update_field debian_release "$(grep -oP '(?<="_debian_release": ")(.*)(?=")' coo
 update_package() {
     field="$1"
     package="$2"
+    cut="${3:-}"
 
     uv pip compile --python=python$python_version --upgrade --resolution=highest <(echo $package) --output-file=cookiecutter-packages.txt
-    update_field $field "$(grep -oPm1 '(?<='$package'==).*' cookiecutter-packages.txt)"
+    value="$(grep -oPm1 '(?<='$package'==).*' cookiecutter-packages.txt)"
+    if [[ -n "$cut" ]]; then
+        value="$(echo $value | cut -d. -f1-$cut)"
+    fi
+    update_field "$field" "$value"
 }
 
-update_package django_version django
+update_package django_version django 2
 update_package pip_tools_version pip-tools
 update_package pip_version pip
 update_package setuptools_version setuptools
