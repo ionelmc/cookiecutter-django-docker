@@ -19,6 +19,11 @@ repos:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix, --show-fixes{% if cookiecutter.ruff_unsafe_fixes %}, --unsafe-fixes{% endif %}]
       - id: ruff-format
+  - repo: https://github.com/ComPWA/taplo-pre-commit
+    rev: main
+    hooks:
+      - id: taplo-format
+      - id: taplo-lint
   - repo: https://github.com/rtts/djhtml
     rev: main
     hooks:
@@ -29,4 +34,5 @@ repos:
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
-      - id: check-toml
+      - id: mixed-line-ending
+        args: [--fix=lf]
