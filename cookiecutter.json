@@ -34,7 +34,7 @@
   "project_version": "0.1.0",
   "docker_lock": false,
   "ruff_unsafe_fixes": false,
-  "_django_version": "4.2",
+  "_django_version": "5.2.5",
   "_dockerfile_version": "1.9",
   "_memcached_version": "1",
   "_pip_tools_version": "7.5.0",
@@ -57,7 +57,7 @@
   "debian_release": "latest",
   "uv_version": "latest",
   "__prompts__": {
-    "django_version": "django_version (latest=4.2)",
+    "django_version": "django_version (latest=5.2.5)",
     "dockerfile_version": "dockerfile_version (latest=1.9)",
     "memcached_version": "memcached_version (latest=1)",
     "pip_tools_version": "pip_tools_version (latest=7.5.0)",
