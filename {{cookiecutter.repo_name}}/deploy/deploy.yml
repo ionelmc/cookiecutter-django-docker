@@ -114,7 +114,6 @@
 {%- endif %}
 {%- raw %}
     - name: start/update services
-      tags: [restart]
       shell:
         executable: /bin/bash
         cmd: |
