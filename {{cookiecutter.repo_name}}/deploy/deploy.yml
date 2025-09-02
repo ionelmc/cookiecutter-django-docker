@@ -1,7 +1,7 @@
 {% raw -%}
 - hosts: 127.0.0.1
   connection: local
-  tags: [build]
+  tags: [ build ]
   tasks:
     - name: start registry
       community.docker.docker_compose_v2:
@@ -33,7 +33,7 @@
 - hosts: all
   tasks:
     - name: log deployment
-      tags: [always]
+      tags: [ always ]
       lineinfile:
         create: true
         dest: /services/deploy.log
@@ -43,7 +43,7 @@
         src: '{{ playbook_dir }}/docker-compose.release.yml'
         dest: '/services/{{ compose_file }}'
     - name: get available compose files
-      tags: [always]
+      tags: [ always ]
       find:
         paths: /services
         patterns: docker-compose*.yml
@@ -55,14 +55,14 @@
     COMPOSE_FILE: '{{ compose_files }}'
   tasks:
     - name: 'copy .env'
-      tags: [env]
+      tags: [ env ]
       copy:
         src: '{{ inventory_dir }}/.env'
         dest: '/services/{{ service_name }}/.env'
         backup: yes
       register: envfile
     - name: set default docker-compose.yml in environment
-      tags: [env]
+      tags: [ env ]
       lineinfile:
         dest: /etc/environment
         regexp: '^COMPOSE_FILE='
@@ -92,7 +92,7 @@
           set -euxo pipefail
           docker compose run --rm --no-TTY {{ service_name }} pysu app django-admin collectstatic --noinput --clear -v0
     - name: restart services
-      tags: [restart, never]
+      tags: [ restart, never ]
       shell:
         executable: /bin/bash
         cmd: |
@@ -128,10 +128,10 @@
           docker compose kill --signal HUP nginx
 - hosts: 127.0.0.1
   connection: local
-  tags: [build]
+  tags: [ build ]
   tasks:
     - name: shutdown registry
-      tags: [cleanup]
+      tags: [ cleanup ]
       community.docker.docker_compose_v2:
         project_name: registry
         state: absent
