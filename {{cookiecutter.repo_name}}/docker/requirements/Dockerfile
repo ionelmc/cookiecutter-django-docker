@@ -23,8 +23,7 @@ EOF
 
 RUN <<EOF bash
     set -euxo pipefail
-    curl -fsSL 'https://bootstrap.pypa.io/get-pip.py' | python - --no-cache --disable-pip-version-check --upgrade --break-system-packages \
-    uv=={{ cookiecutter.__uv_version }}
+    curl -fsSL https://github.com/astral-sh/uv/releases/download/{{ cookiecutter.__uv_version }}/uv-installer.sh | XDG_BIN_HOME=/usr/local/bin sh
 EOF
 
 ENV CPUCOUNT=1
