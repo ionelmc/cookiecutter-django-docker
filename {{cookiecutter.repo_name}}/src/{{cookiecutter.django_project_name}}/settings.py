@@ -282,27 +282,35 @@ LOGGING = {
 
 # Advanced debug settings
 SENTRY_DSN = env.get("SENTRY_DSN")
+SENTRY_TRACE = env.float("SENTRY_TRACE", 1.0)
 if SENTRY_DSN:
     import logging
 
     import sentry_sdk
+    from django.http import Http404
     from sentry_sdk.integrations.django import DjangoIntegration
     from sentry_sdk.integrations.logging import LoggingIntegration
     from sentry_sdk.integrations.logging import ignore_logger
 
     ignore_logger("django.security.DisallowedHost")
     sentry_sdk.init(
-        release=f"{{ cookiecutter.django_project_name }}@{PROJECT_VERSION}",
+        debug=DEBUG,
         dsn=SENTRY_DSN,
+        ignore_errors=[Http404],
         integrations=[
-            DjangoIntegration(),
+            DjangoIntegration(
+                middleware_spans=False,
+                signals_spans=False,
+                transaction_style="url",
+            ),
             LoggingIntegration(
                 level=logging.INFO,
                 event_level=logging.ERROR,
             ),
         ],
+        max_value_length=64 * 1024,
+        release=f"{{ cookiecutter.django_project_name }}@{PROJECT_VERSION}",
         send_default_pii=True,
-        auto_session_tracking=False,
     )
 
 if DEBUG_SQL:
