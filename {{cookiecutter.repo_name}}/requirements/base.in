@@ -23,6 +23,7 @@ pysu
 django-debug-toolbar
 django-extensions
 django-rosetta
+django-silk
 werkzeug
 
 # for sql logging

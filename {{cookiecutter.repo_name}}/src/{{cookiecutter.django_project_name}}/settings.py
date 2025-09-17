@@ -42,6 +42,7 @@ DEBUG = env.bool("DJANGO_DEBUG", False)
 DEBUG_SQL = env.bool("DJANGO_DEBUG_SQL", False)
 DEBUG_SQL_LIMIT = env.int("DJANGO_DEBUG_SQL_LIMIT", 5)
 DEBUG_TOOLBAR = env.bool("DJANGO_DEBUG_TOOLBAR", False)
+DEBUG_SILK = env.bool("DJANGO_DEBUG_SILK", False)
 LOGGING_PATH = env.get("LOGGING_PATH")
 LOGGING_LEVEL = env.str("LOGGING_LEVEL", "INFO")
 
@@ -370,6 +371,16 @@ if LOGGING_PATH:
 if DEBUG:
     INSTALLED_APPS += [
         "rosetta",
+    ]
+
+if DEBUG_SILK:
+    SILKY_ANALYZE_QUERIES = False
+    SILKY_PYTHON_PROFILER = True
+    SILKY_PYTHON_PROFILER_BINARY = True
+
+    MIDDLEWARE.insert(0, "silk.middleware.SilkyMiddleware")
+    INSTALLED_APPS += [
+        "silk",
     ]
 
 if DEBUG_TOOLBAR:

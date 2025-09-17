@@ -66,6 +66,7 @@ services:
       DJANGO_DEBUG_SQL:
       DJANGO_DEBUG_SQL_LIMIT:
       DJANGO_DEBUG_TOOLBAR:
+      DJANGO_SILK:
       LOGGING_LEVEL:
       LOGGING_PATH:
     deploy:
