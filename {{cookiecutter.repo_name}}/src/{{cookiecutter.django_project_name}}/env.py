@@ -2,13 +2,15 @@ import builtins
 import os
 import pathlib
 
+UNSET = object()
+
 
 def get(key) -> builtins.str | None:
     return os.environ.get(key)
 
 
-def str(key, default=Ellipsis) -> builtins.str:
-    if default is Ellipsis:
+def str(key, default=UNSET) -> builtins.str:
+    if default is UNSET:
         if bool("__strict_env__", True):
             return os.environ[key]
         else:
@@ -29,6 +31,10 @@ def int(key, default) -> builtins.int:
     return builtins.int(str(key, default))
 
 
+def float(key, default) -> builtins.float:
+    return builtins.float(str(key, default))
+
+
 def bool(key, default) -> builtins.bool:
     if key in os.environ:
         return os.environ.get(key).lower() in ("yes", "true", "y", "1")
@@ -36,7 +42,7 @@ def bool(key, default) -> builtins.bool:
         return default
 
 
-def path(key, default=Ellipsis) -> pathlib.Path:
+def path(key, default=UNSET) -> pathlib.Path:
     value = str(key, default)
     value = pathlib.Path(value)
     assert value.exists(), f"{value!r} does not exist"
