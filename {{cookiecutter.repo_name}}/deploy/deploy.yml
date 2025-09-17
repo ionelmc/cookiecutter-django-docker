@@ -84,6 +84,13 @@
           exec > >(tee -a /services/deploy.log) 2>&1
           set -euxo pipefail
           docker compose run --rm --no-TTY {{ service_name }} pysu app django-admin migrate --no-input
+    - name: run update_permissions
+      shell:
+        executable: /bin/bash
+        cmd: |
+          exec > >(tee -a /services/deploy.log) 2>&1
+          set -euxo pipefail
+          docker compose run --rm --no-TTY {{ service_name }} pysu app django-admin update_permissions
     - name: run collectstatic
       shell:
         executable: /bin/bash
