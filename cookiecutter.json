@@ -44,7 +44,7 @@
   "_redis_version": "7",
   "_setuptools_version": "80.9.0",
   "_debian_release": "bookworm",
-  "_uv_version": "0.8.17",
+  "_uv_version": "0.8.18",
   "django_version": "latest",
   "dockerfile_version": "latest",
   "memcached_version": "latest",
@@ -67,7 +67,7 @@
     "redis_version": "redis_version (latest=7)",
     "setuptools_version": "setuptools_version (latest=80.9.0)",
     "debian_release": "debian_release (latest=bookworm)",
-    "uv_version": "uv_version (latest=0.8.17)"
+    "uv_version": "uv_version (latest=0.8.18)"
   },
   "__django_version": "{{ cookiecutter._django_version if cookiecutter.django_version == 'latest' else cookiecutter.django_version }}",
   "__dockerfile_version": "{{ cookiecutter._dockerfile_version if cookiecutter.dockerfile_version == 'latest' else cookiecutter.dockerfile_version }}",
