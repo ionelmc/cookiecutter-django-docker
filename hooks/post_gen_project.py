@@ -93,8 +93,6 @@ if __name__ == "__main__":
 
     note('+ pre-commit autoupdate')
     subprocess.check_call(['pre-commit', 'autoupdate'])
-    note('+ pre-commit install --install-hooks')
-    subprocess.check_call(['pre-commit', 'install', '--install-hooks'])
 
     warn("""
 ################################################################################
@@ -124,4 +122,12 @@ if __name__ == "__main__":
     You can bring up the project with:
 
         docker compose up
+
+    Install pre-commit hooks with:
+
+        pre-commit install --install-hooks --overwrite
+
+    Or if you have prek installed:
+
+        prek install --install-hooks --overwrite
     """)
