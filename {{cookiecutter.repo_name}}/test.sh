@@ -51,14 +51,22 @@ else
     GROUP_ID="$(id -g "$USER")"
 fi
 BUILD_ARGS="--build-arg USER_ID=$USER_ID --build-arg GROUP_ID=$GROUP_ID --build-arg BUILDKIT_INLINE_CACHE=1"
+if [[ "${1:-}" == "requirements" ]]; then
+    REQUIREMENTS_REQUESTED=true
+else
+    REQUIREMENTS_REQUESTED=false
+fi
 
-if [[ -z "$(find requirements -maxdepth 1 -name '*.txt' -print -quit)" ]] || [[ "$*" == "requirements" ]]; then
+if [[ -z "$(find requirements -maxdepth 1 -name '*.txt' -print -quit)" ]] || $REQUIREMENTS_REQUESTED; then
     set -x
     docker compose build $BUILD_ARGS requirements
     mkdir -p .home/requirements
     chown -R $USER_ID .home/requirements
-    docker compose run --rm --user=$USER_ID requirements
-    if [[ "$*" == "requirements" ]]; then
+    if $REQUIREMENTS_REQUESTED; then
+        shift
+    fi
+    docker compose run --rm --user=$USER_ID requirements "$@"
+    if $REQUIREMENTS_REQUESTED; then
         exit
     fi
     set +x
