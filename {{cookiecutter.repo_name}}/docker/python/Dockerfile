@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:{{ cookiecutter.__dockerfile_version }}
-FROM python:{{ cookiecutter.__python_version }}-{{ cookiecutter.__debian_release }} as deps
+FROM python:{{ cookiecutter.__python_version }}-{{ cookiecutter.__debian_release }} AS deps
 
 # DEBIAN_FRONTEND=noninteractive exists to prevent tzdata going nuts.
 # Maybe dpkg incorrectly detects interactive on buildkit containers?
@@ -42,7 +42,7 @@ EOF
 
 ##################################
 ##################################
-FROM python:{{ cookiecutter.__python_version }}-{{ cookiecutter.__debian_release }} as certs
+FROM python:{{ cookiecutter.__python_version }}-{{ cookiecutter.__debian_release }} AS certs
 ##################################
 ARG SERVER_NAME="localhost"
 
