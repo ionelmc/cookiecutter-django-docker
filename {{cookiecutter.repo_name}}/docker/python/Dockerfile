@@ -161,14 +161,14 @@ COPY --link uwsgi.ini /etc/app-latest/
 COPY --link worker.ini /etc/app-latest/
 {%- endif %}
 COPY --link nginx.conf /etc/app-latest/
-COPY --link nginx.site /etc/app-latest/
+COPY --link nginx.site.conf /etc/app-latest/
 COPY --link yacron.yml /etc/app-latest/
 COPY --link --from=certs --chmod=0644 /certs/* /etc/app-defaults/
 
 ARG SERVER_NAME="localhost"
 RUN <<EOF bash
     set -euxo pipefail
-    envsubst '\$SERVER_NAME' < /etc/app-latest/nginx.site | sponge /etc/app-latest/nginx.site
+    envsubst '\$SERVER_NAME' < /etc/app-latest/nginx.site.conf | sponge /etc/app-latest/nginx.site.conf
 EOF
 RUN ln -s cert.pem /etc/app-defaults/chain.pem \
  && ln -s cert.pem /etc/app-defaults/fullchain.pem \
