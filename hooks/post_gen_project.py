@@ -91,8 +91,13 @@ if __name__ == "__main__":
     subprocess.check_call(['docker', 'lock', 'verify', '--update-existing-digests'])
 {%- endif %}
 
-    note('+ pre-commit autoupdate')
-    subprocess.check_call(['pre-commit', 'autoupdate'])
+    if shutil.which('prek'):
+        note('+ prek autoupdate')
+        subprocess.check_call(['prek', 'autoupdate'])
+    elif shutil.which('pre-commit'):
+        note('+ pre-commit autoupdate')
+        subprocess.check_call(['pre-commit', 'autoupdate'])
+
 
     warn("""
 ################################################################################
