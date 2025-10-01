@@ -17,7 +17,7 @@ RUN <<EOF bash
         libgdal-dev \
         libtiff-dev libjpeg-dev libzip-dev libfreetype-dev \
         libwebp-dev tcl-dev tk-dev libffi-dev \
-        zlib1g-dev libpcre3-dev \
+        zlib1g-dev libpcre2-dev \
         build-essential git sudo ca-certificates
 EOF
 

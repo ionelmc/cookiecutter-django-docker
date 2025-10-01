@@ -76,8 +76,7 @@
           - apt-transport-https
           - ca-certificates
           - curl
-          - gnupg-agent
-          - software-properties-common
+          - gnupg
     - name: install docker.com key
       apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg

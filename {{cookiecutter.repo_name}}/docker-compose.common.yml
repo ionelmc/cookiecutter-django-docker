@@ -86,6 +86,8 @@ services:
       - ./.home:/home/app
       - ./.home:/var/app
     init: true
+    env_file:
+      - .env
 {%- if cookiecutter.worker == "celery" %}
 
   worker:
