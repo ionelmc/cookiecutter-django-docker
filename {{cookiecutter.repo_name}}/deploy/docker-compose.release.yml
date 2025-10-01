@@ -87,7 +87,7 @@ services:
     ]
     shm_size: 256MB
     volumes:
-      - /services/pg/data:/var/lib/postgresql/data
+      - /services/pg/data:/var/lib/postgresql
       - /services/pg/logs:/var/log/postgresql
     environment:
       PGUSER: app
