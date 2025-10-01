@@ -268,13 +268,13 @@ LOGGING = {
         "handlers": ["console", "mail_admins"],
     },
     "loggers": {
-        "django.request": {"level": LOGGING_LEVEL},
-        "django.db.backends": {"level": LOGGING_LEVEL},
-        "uvicorn": {"propagate": True},
         "asyncio": {"level": "INFO"},
-        "parso": {"level": "WARNING"},
+        "django.db.backends": {"level": LOGGING_LEVEL},
+        "django.request": {"level": LOGGING_LEVEL},
         "httpcore": {"level": "WARNING"},
         "httpx": {"level": "WARNING"},
+        "parso": {"level": "WARNING"},
+        "uvicorn": {"propagate": True},
     },
     "filters": {},
 }
