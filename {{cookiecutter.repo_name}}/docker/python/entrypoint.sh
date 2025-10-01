@@ -5,7 +5,7 @@ chown -R app:app /var/app || true
 
 # Copy files in the /etc/app volume. Note that the "/" suffix is significant.
 rsync --itemize-changes --ignore-existing --recursive --links /etc/app-defaults/ /etc/app
-rsync --itemize-changes --backup --info=backup --checksum --suffix=".$(date +'%Y%m%d%H%M%S')~" --recursive /etc/app-latest/ /etc/app
+rsync --itemize-changes --backup --info=backup --checksum --suffix=".$(date +'%Y%m%d%H%M%S%N')~" --recursive /etc/app-latest/ /etc/app
 
 set +x
 if [[ -n "${DJANGO_COLLECTSTATIC:-}" ]]; then
