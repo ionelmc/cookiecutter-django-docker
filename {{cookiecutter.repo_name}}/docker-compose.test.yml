@@ -17,8 +17,7 @@ services:
         REQUIREMENTS: test
         DJANGO_SETTINGS_MODULE: '{{ cookiecutter.django_project_name }}.settings_test'
     entrypoint: /app/tests/entrypoint.sh
-    env_file:
-      - .env-test
+    env_file: .env-test
     environment:
       PYTHONPATH: /app/src:/app/tests
       DJANGO_DEBUG:
