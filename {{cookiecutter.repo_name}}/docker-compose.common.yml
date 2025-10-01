@@ -42,11 +42,11 @@ services:
 #      '-c', 'synchronous_commit=off',
     ]
 
-  pgupgrade:
-    image: pgautoupgrade/pgautoupgrade:{{ cookiecutter.__postgresql_version }}-{{ cookiecutter.__debian_release }}
-    environment:
-      POSTGRES_PASSWORD: app
-      PGAUTO_ONESHOT: yes
+#  pgupgrade:
+#    image: pgautoupgrade/pgautoupgrade:{{ cookiecutter.__postgresql_version }}-{{ cookiecutter.__debian_release }}
+#    environment:
+#      POSTGRES_PASSWORD: app
+#      PGAUTO_ONESHOT: yes
 
   python:
     build:
