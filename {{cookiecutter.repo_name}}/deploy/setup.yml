@@ -108,6 +108,12 @@
         dest: /etc/environment
         regexp: '^COMPOSE_FILE='
         line: 'COMPOSE_FILE={{ compose_files|quote }}'
+    - name: disable compose menu
+      tags: [ env ]
+      lineinfile:
+        dest: /etc/environment
+        regexp: '^COMPOSE_MENU='
+        line: 'COMPOSE_MENU=0'
     - name: allow http
       loop: '{{ groups.web }}'
       ufw:
