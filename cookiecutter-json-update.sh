@@ -35,7 +35,6 @@ update_package() {
 }
 
 update_package django_version django 2
-update_package pip_tools_version pip-tools
 update_package pip_version pip
 update_package setuptools_version setuptools
 update_package uv_version uv

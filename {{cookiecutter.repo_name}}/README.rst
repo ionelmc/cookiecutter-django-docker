@@ -26,10 +26,10 @@ sudo.
 Managing requirements
 ---------------------
 
-Python requirements are managed with pip-tools - abstract requirements are in ".in" files while concrete requirements (pins) are in ".txt"
+Python requirements are managed with uv - abstract requirements are in ".in" files while concrete requirements (pins) are in ".txt"
 files.
 
-There is a shim to update all the files correctly (using pip-tools installed in a correct environment) - just run::
+There is a shim to update all the files correctly (using uv installed in a correct environment) - just run::
 
     ./test.sh requirements
 
