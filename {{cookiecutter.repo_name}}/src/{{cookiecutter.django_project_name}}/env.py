@@ -9,7 +9,7 @@ def get(key) -> builtins.str | None:
     return os.environ.get(key)
 
 
-def str(key, default=UNSET) -> builtins.str:
+def str(key, default=UNSET) -> builtins.str | None:
     if default is UNSET:
         if bool("__strict_env__", True):
             return os.environ[key]
@@ -19,31 +19,45 @@ def str(key, default=UNSET) -> builtins.str:
         return os.environ.get(key, default)
 
 
-def list(key, default=None, separator=",") -> builtins.list:
+def list(key, default=UNSET, separator=",") -> builtins.list:
     value = str(key, default)
     if value is None:
         return []
-    else:
+    elif isinstance(value, builtins.str):
         return value.split(separator)
-
-
-def int(key, default) -> builtins.int:
-    return builtins.int(str(key, default))
-
-
-def float(key, default) -> builtins.float:
-    return builtins.float(str(key, default))
-
-
-def bool(key, default) -> builtins.bool:
-    if key in os.environ:
-        return os.environ.get(key).lower() in ("yes", "true", "y", "1")
     else:
-        return default
+        return value
 
 
-def path(key, default=UNSET) -> pathlib.Path:
+def int(key, default=UNSET) -> builtins.int | None:
     value = str(key, default)
-    value = pathlib.Path(value)
-    assert value.exists(), f"{value!r} does not exist"
-    return value
+    if value is None:
+        return
+    else:
+        return builtins.int(value)
+
+
+def float(key, default=UNSET) -> builtins.float | None:
+    value = str(key, default)
+    if value is None:
+        return
+    else:
+        return builtins.float(value)
+
+
+def bool(key, default=UNSET) -> builtins.bool | None:
+    value = str(key, default)
+    if isinstance(value, builtins.str):
+        return value.lower() in ("yes", "true", "y", "1")
+    else:
+        return value
+
+
+def path(key, default=UNSET) -> pathlib.Path | None:
+    value = str(key, default)
+    if value is None:
+        return
+    else:
+        value = pathlib.Path(value)
+        assert value.exists(), f"{value!r} does not exist"
+        return value

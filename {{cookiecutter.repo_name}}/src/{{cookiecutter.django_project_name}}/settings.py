@@ -47,8 +47,8 @@ LOGGING_PATH = env.get("LOGGING_PATH")
 LOGGING_LEVEL = env.str("LOGGING_LEVEL", "INFO")
 
 X_FRAME_OPTIONS = "DENY"
-ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS") or [SERVER_NAME]
-ADMINS = [(email, email) for email in env.list("DJANGO_ADMINS")]
+ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", [SERVER_NAME])
+ADMINS = [(email, email) for email in env.list("DJANGO_ADMINS", [])]
 
 EMAIL_HOST = env.get("DJANGO_EMAIL_HOST")
 EMAIL_HOST_USER = env.get("DJANGO_EMAIL_HOST_USER")
