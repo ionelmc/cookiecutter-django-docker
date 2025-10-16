@@ -7,15 +7,16 @@
       community.docker.docker_compose_v2:
         project_name: registry
         remove_orphans: yes
-        definition:
-          services: >
-            {
+        definition: >
+          {
+            "services": {
               "{{ service_name }}": {
                 "image": "registry:2",
-                "ports": ["{{ registry_port }}:5000"],
-                "volumes": ["{{ playbook_dir }}/../.home/registry:/var/lib/registry"]
+                "ports": [ "{{ registry_port }}:5000" ],
+                "volumes": [ "{{ playbook_dir }}/../.home/registry:/var/lib/registry" ]
               }
             }
+          }
     - name: build and publish image
       command:
         chdir: ..
@@ -143,6 +144,10 @@
         project_name: registry
         state: absent
         remove_orphans: yes
-        definition:
-          services: '{"{{ service_name }}": {"image": "registry:2"}}'
+        definition: >
+          {
+            "services": {
+              "{{ service_name }}": {"image": "registry:2"}
+            }
+          }
 {%- endraw %}
