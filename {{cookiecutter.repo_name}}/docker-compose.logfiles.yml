@@ -1,0 +1,10 @@
+services:
+  web:
+    volumes:
+      - ./.home/logs:/var/app/logs
+    environment:
+      LOGGING_PATH: /var/app/logs
+  nginx:
+    volumes:
+      - ./.home/logs:/shared/${SERVER_NAME}/logs
+      - ./.home/logs:/var/app/logs

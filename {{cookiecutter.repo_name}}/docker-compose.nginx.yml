@@ -8,9 +8,6 @@ services:
     # Because this file is an overlay this service is not completely defined.
     environment:
       DJANGO_COLLECTSTATIC: x
-    volumes:
-      - ./.home/run:/var/app/run
-      - ./.home/static:/var/app/static
     stop_signal: SIGTERM
     command: [
       'uwsgi',

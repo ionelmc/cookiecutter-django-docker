@@ -84,7 +84,10 @@ services:
       - .:/app
       - ./.home:/root
       - ./.home:/home/app
-      - ./.home:/var/app
+      - ./.home/run:/var/app/run
+      - ./.home/static:/var/app/static
+      - ./.home/media:/var/app/media
+      - ./.home/emails:/var/app/emails
     init: true
 
 {%- if cookiecutter.worker == "celery" %}

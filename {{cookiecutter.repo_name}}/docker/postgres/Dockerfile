@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:{{ cookiecutter.__dockerfile_version }}
 FROM postgres:{{ cookiecutter.__postgresql_version }}
 
 RUN if which apk; then apk --no-cache add shadow; fi

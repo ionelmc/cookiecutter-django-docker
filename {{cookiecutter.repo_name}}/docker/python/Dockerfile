@@ -148,9 +148,13 @@ RUN <<'EOF' bash
     mkdir -p $pth_location
     echo /app/src > $pth_location/app.pth
 EOF
-RUN ln -sf /proc/self/fd/2 /var/app/logs/error.log \
- && ln -sf /proc/self/fd/2 /shared/$SERVER_NAME/logs/error.log \
- && ln -sf /proc/self/fd/1 /shared/$SERVER_NAME/logs/access.log
+
+RUN <<'EOF' bash
+    ln -sf /proc/self/fd/1 /var/app/logs/uwsgi.log
+    ln -sf /proc/self/fd/2 /var/app/logs/error.log
+    ln -sf /proc/self/fd/2 /shared/$SERVER_NAME/logs/nginx.log
+    ln -sf /proc/self/fd/1 /shared/$SERVER_NAME/logs/access.log
+EOF
 
 WORKDIR /app
 
