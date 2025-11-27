@@ -101,7 +101,7 @@ function cleanup() {
     echo "Saving logs to docker-compose.log"
     docker compose logs --no-color &> docker-compose.log
     echo "Cleaning up ..."
-    docker compose down && docker compose rm -fv
+    docker compose down --remove-orphans && docker compose rm -fv
 }
 if [[ -n "${NODEPS:-}" ]]; then
     exec docker compose run -e NODEPS=yes --no-deps --rm --user=$USER_ID test "$@"
