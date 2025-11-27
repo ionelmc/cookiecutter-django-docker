@@ -33,7 +33,6 @@ services:
       - pg
     volumes:
       - ./:/app
-      - ./.home:/var/app
 
   pg:
     extends:

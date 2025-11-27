@@ -48,6 +48,8 @@ services:
   {{ service_name }}:
     <<: *python
     command: [ 'uwsgi', '--ini', '/etc/app/uwsgi.ini' ]
+    environment:
+      UWSGI_LOGTO: /var/app/logs/uwsgi.log
 {%- endraw %}
 {%- if cookiecutter.deploy_worker %}
 {%- raw %}

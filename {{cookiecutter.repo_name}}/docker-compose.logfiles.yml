@@ -4,6 +4,7 @@ services:
       - ./.home/logs:/var/app/logs
     environment:
       LOGGING_PATH: /var/app/logs
+      UWSGI_LOGTO: /var/app/logs/uwsgi.log
   nginx:
     volumes:
       - ./.home/logs:/shared/${SERVER_NAME}/logs
