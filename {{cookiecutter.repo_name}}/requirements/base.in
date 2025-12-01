@@ -31,15 +31,10 @@ sqlparse
 colorama
 
 # generic debugging
-remote-pdb
-aspectlib
 hunter
 
 # ipdb
 ipdb
-ipython
-jedi
-prompt_toolkit
 
 # cron
 yacron
