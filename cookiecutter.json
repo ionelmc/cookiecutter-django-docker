@@ -34,7 +34,7 @@
   "project_version": "0.1.0",
   "docker_lock": false,
   "ruff_unsafe_fixes": false,
-  "_django_version": "5.2",
+  "_django_version": "6.0",
   "_dockerfile_version": "1",
   "_memcached_version": "1",
   "_pip_version": "25.3",
@@ -43,7 +43,7 @@
   "_redis_version": "8",
   "_setuptools_version": "80.9.0",
   "_debian_release": "trixie",
-  "_uv_version": "0.9.15",
+  "_uv_version": "0.9.18",
   "django_version": "latest",
   "dockerfile_version": "latest",
   "memcached_version": "latest",
@@ -55,7 +55,7 @@
   "debian_release": "latest",
   "uv_version": "latest",
   "__prompts__": {
-    "django_version": "django_version (latest=5.2)",
+    "django_version": "django_version (latest=6.0)",
     "dockerfile_version": "dockerfile_version (latest=1)",
     "memcached_version": "memcached_version (latest=1)",
     "pip_version": "pip_version (latest=25.3)",
@@ -64,7 +64,7 @@
     "redis_version": "redis_version (latest=8)",
     "setuptools_version": "setuptools_version (latest=80.9.0)",
     "debian_release": "debian_release (latest=trixie)",
-    "uv_version": "uv_version (latest=0.9.15)"
+    "uv_version": "uv_version (latest=0.9.18)"
   },
   "__django_version": "{{ cookiecutter._django_version if cookiecutter.django_version == 'latest' else cookiecutter.django_version }}",
   "__dockerfile_version": "{{ cookiecutter._dockerfile_version if cookiecutter.dockerfile_version == 'latest' else cookiecutter.dockerfile_version }}",
