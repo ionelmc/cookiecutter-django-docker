@@ -1,4 +1,4 @@
-django
+django~={{ cookiecutter.__django_version }}
 
 # bare minimum stuff
 attrs
