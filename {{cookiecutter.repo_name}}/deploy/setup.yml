@@ -116,18 +116,18 @@
         line: 'COMPOSE_MENU=0'
     - name: allow http
       loop: '{{ groups.web }}'
-      ufw:
+      community.general.ufw:
         rule: allow
         proto: tcp
-        from: '{{ hostvars[item].ansible_default_ipv4.address }}'
+        from: '{{ hostvars[item].ansible_facts.default_ipv4.address }}'
         to: any
         port: '80'
     - name: allow https
       loop: '{{ groups.web }}'
-      ufw:
+      community.general.ufw:
         rule: allow
         proto: tcp
-        from: '{{ hostvars[item].ansible_default_ipv4.address }}'
+        from: '{{ hostvars[item].ansible_facts.default_ipv4.address }}'
         to: any
         port: '443'
     - name: log deployment
@@ -137,7 +137,7 @@
         dest: /services/deploy.log
         line: ===== {{ inventory_dir|basename }} setup @ {{ now() }} =====
     - name: update services after env update
-      when: envfile.changed and compose_files
+      when: envfile.changed and compose_files | length > 0
       tags: [ env ]
       shell:
         executable: /bin/bash

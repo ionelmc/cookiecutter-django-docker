@@ -20,7 +20,7 @@
       cron:
         env: true
         name: PATH
-        job: '{{ ansible_env.PATH }}'
+        job: '{{ ansible_facts.env.PATH }}'
     - name: install renewal cron job
       cron:
         name: certbot_renew
