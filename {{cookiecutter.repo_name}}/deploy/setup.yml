@@ -8,7 +8,7 @@
           registry_host: '{{ registry_host }}'
           app_version: '{{ app_version }}'
           compose_file: '{{ compose_file }}'
-          lsb: '{{ ansible_lsb.codename }}'
+          lsb: '{{ ansible_facts.lsb.codename }}'
           host: '{{ ansible_host }}'
       debug:
         var: msg
@@ -82,7 +82,7 @@
         url: https://download.docker.com/linux/ubuntu/gpg
     - name: install docker.com repo
       apt_repository:
-        repo: 'deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_lsb.codename }} stable'
+        repo: 'deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_facts.lsb.codename }} stable'
     - name: install docker
       apt:
         pkg:
