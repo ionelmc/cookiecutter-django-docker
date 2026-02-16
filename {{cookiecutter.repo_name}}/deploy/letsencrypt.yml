@@ -33,6 +33,7 @@
         cmd: |
           exec > >(tee -a /services/deploy.log) 2>&1
           set -euxo pipefail
+          date --iso-8601=s
           docker compose run --rm --no-TTY nginx certbot certonly \
             --webroot \
             --agree-tos \
@@ -48,6 +49,7 @@
         cmd: |
           exec > >(tee -a /services/deploy.log) 2>&1
           set -euxo pipefail
+          date --iso-8601=s
           docker compose run --rm --no-TTY \
             -e 'RENEWED_LINEAGE=/etc/letsencrypt/live/{{ server_name }}' \
             -e 'RENEWED_DOMAINS={{ server_name }}' \
@@ -58,5 +60,6 @@
         cmd: |
           exec > >(tee -a /services/deploy.log) 2>&1
           set -euxo pipefail
+          date --iso-8601=s
           docker compose kill --signal HUP nginx
 {% endraw -%}
