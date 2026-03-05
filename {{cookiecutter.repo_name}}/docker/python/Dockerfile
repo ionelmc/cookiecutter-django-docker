@@ -8,7 +8,7 @@ RUN <<EOF bash
     export DEBIAN_FRONTEND=noninteractive
 
     echo "deb http://apt.postgresql.org/pub/repos/apt {{ cookiecutter.__debian_release }}-pgdg main {{ cookiecutter.__postgresql_version.split('.')|first }}" > /etc/apt/sources.list.d/pgdg.list
-    curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/apt.postgresql.org.gpg
+    curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/apt.postgresql.org.gpg
     apt-get update
     apt-get install -y --no-install-recommends \
         libpq-dev={{ cookiecutter.__postgresql_version.split('.')|first }}.* libpq5={{ cookiecutter.__postgresql_version.split('.')|first }}.* \
@@ -67,8 +67,8 @@ RUN <<EOF bash
         curl gnupg
     echo "deb http://apt.postgresql.org/pub/repos/apt {{ cookiecutter.__debian_release }}-pgdg main {{ cookiecutter.__postgresql_version.split('.')|first }}" > /etc/apt/sources.list.d/pgdg.list
     echo "deb http://nginx.org/packages/mainline/debian/ {{ cookiecutter.__debian_release }} nginx" > /etc/apt/sources.list.d/nginx.list
-    curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/apt.postgresql.org.gpg
-    curl http://nginx.org/keys/nginx_signing.key | gpg --dearmor > /etc/apt/trusted.gpg.d/nginx.org.gpg
+    curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/apt.postgresql.org.gpg
+    curl -fsSL http://nginx.org/keys/nginx_signing.key | gpg --dearmor > /etc/apt/trusted.gpg.d/nginx.org.gpg
     apt-get update
     apt-get install -y --no-install-recommends \
         strace ltrace gdb lsof locate net-tools htop iputils-ping dnsutils \
