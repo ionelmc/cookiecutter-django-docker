@@ -72,7 +72,7 @@ RUN <<EOF bash
     apt-get update
     apt-get install -y --no-install-recommends \
         strace ltrace gdb lsof locate net-tools htop iputils-ping dnsutils \
-        nano vim tree less telnet socat byobu \
+        nano vim tree less telnet socat screen \
         rsync moreutils \
         graphviz \
         dumb-init \
