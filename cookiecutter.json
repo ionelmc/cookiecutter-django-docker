@@ -41,9 +41,9 @@
   "_postgresql_version": "18",
   "_python_version": "3.14",
   "_redis_version": "8",
-  "_setuptools_version": "82.0.0",
+  "_setuptools_version": "82.0.1",
   "_debian_release": "trixie",
-  "_uv_version": "0.10.8",
+  "_uv_version": "0.10.9",
   "django_version": "latest",
   "dockerfile_version": "latest",
   "memcached_version": "latest",
@@ -62,9 +62,9 @@
     "postgresql_version": "postgresql_version (latest=18)",
     "python_version": "python_version (latest=3.14)",
     "redis_version": "redis_version (latest=8)",
-    "setuptools_version": "setuptools_version (latest=82.0.0)",
+    "setuptools_version": "setuptools_version (latest=82.0.1)",
     "debian_release": "debian_release (latest=trixie)",
-    "uv_version": "uv_version (latest=0.10.8)"
+    "uv_version": "uv_version (latest=0.10.9)"
   },
   "__django_version": "{{ cookiecutter._django_version if cookiecutter.django_version == 'latest' else cookiecutter.django_version }}",
   "__dockerfile_version": "{{ cookiecutter._dockerfile_version if cookiecutter.dockerfile_version == 'latest' else cookiecutter.dockerfile_version }}",
