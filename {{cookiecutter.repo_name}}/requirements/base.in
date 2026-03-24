@@ -5,8 +5,8 @@ attrs
 django-admin-utils
 django-crispy-forms
 django-settings-export
-httpx
 lazy_object_proxy
+niquests[brotli,http3]
 python-dateutil
 sentry-sdk
 tzdata
