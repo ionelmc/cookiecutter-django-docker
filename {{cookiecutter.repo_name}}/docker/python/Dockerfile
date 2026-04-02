@@ -133,7 +133,8 @@ ARG DJANGO_SETTINGS_MODULE
 ENV DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
 
 ARG DJANGO_SECRET_KEY="n/a"
-ARG SERVER_NAME="localhost"
+ARG SERVER_NAME
+RUN test -n "$SERVER_NAME"
 ENV SERVER_NAME=$SERVER_NAME
 
 RUN mkdir -p /app /var/app/logs /var/app/static /var/app/run /etc/app /etc/app-defaults /etc/app-latest \
@@ -168,7 +169,6 @@ COPY --link nginx.site.conf /etc/app-latest/
 COPY --link yacron.yml /etc/app-latest/
 COPY --link --from=certs --chmod=0644 /certs/* /etc/app-defaults/
 
-ARG SERVER_NAME="localhost"
 RUN <<EOF bash
     set -euxo pipefail
     envsubst '\$SERVER_NAME' < /etc/app-latest/nginx.site.conf | sponge /etc/app-latest/nginx.site.conf
