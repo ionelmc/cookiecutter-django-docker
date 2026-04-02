@@ -12,62 +12,6 @@
           host: '{{ ansible_host }}'
       debug:
         var: msg
-    - name: 'checking dirs'
-      stat:
-        path: '{{ item }}'
-      register: paths
-      with_items:
-        - /services/nginx/logs
-        - /services/nginx/etc
-        - /services/nginx/etc/renewal-hooks/deploy
-        - /services/{{ service_name }}/logs
-        - /services/{{ service_name }}/emails
-        - /services/{{ service_name }}/etc
-        - /services/{{ service_name }}/.well-known
-        - /services/pg/logs
-        - /services/pg/data
-    - name: 'making dirs'
-      file:
-        path: '{{ item.item }}'
-        state: directory
-      when: item.stat.exists == false
-      loop: '{{ paths.results }}'
-    - name: 'fixing perms'
-      file:
-        path: '/services/{{ item }}/logs'
-        mode: 0777
-      with_items:
-        - nginx
-        - '{{ service_name }}'
-        - pg
-    - name: 'copy .env'
-      tags: [ env ]
-      copy:
-        src: '{{ inventory_dir }}/.env'
-        dest: '/services/{{ service_name }}/.env'
-        backup: yes
-      register: envfile
-    - name: logrotate config
-      copy:
-        dest: '/etc/logrotate.d/{{ item }}'
-        content: |
-          /services/{{ item }}/logs/*.log {
-            compress
-            compressoptions "-9"
-            monthly
-            dateext
-            rotate 36
-            nomail
-            noolddir
-            notifempty
-            noshred
-          }
-      with_items:
-        - nginx
-        - '{{ service_name }}'
-        - pg
-- hosts: all
-  tasks:
     - name: install docker.com pre-requisites
       apt:
         update_cache: yes
@@ -90,6 +34,73 @@
           - docker-ce-cli
           - containerd.io
           - docker-compose-plugin
+    - name: create service group
+      ansible.builtin.group:
+        name: service-{{ service_name }}
+        gid: '{{ user_id }}'
+    - name: create service user
+      ansible.builtin.user:
+        name: service-{{ service_name }}
+        uid: '{{ user_id }}'
+        group: 'service-{{ service_name }}'
+        # if mounting the docker socket
+        #groups: [ docker ]
+        system: true
+    - name: checking dirs
+      stat:
+        path: '{{ item }}'
+      register: paths
+      with_items:
+        - /services/nginx/logs
+        - /services/nginx/etc
+        - /services/nginx/etc/renewal-hooks/deploy
+        - /services/{{ service_name }}/emails
+        - /services/{{ service_name }}/etc
+        - /services/{{ service_name }}/logs
+        - /services/{{ service_name }}/media
+        - /services/{{ service_name }}/.well-known
+        - /services/pg/logs
+        - /services/pg/data
+    - name: making dirs
+      file:
+        path: '{{ item.item }}'
+        state: directory
+      when: item.stat.exists == false
+      loop: '{{ paths.results }}'
+    - name: fixing perms
+      file:
+        path: '/services/{{ item }}/logs'
+        mode: 0777
+      with_items:
+        - nginx
+        - '{{ service_name }}'
+        - pg
+    - name: copy .env
+      tags: [ env ]
+      copy:
+        src: '{{ inventory_dir }}/.env'
+        dest: '/services/{{ service_name }}/.env'
+        backup: yes
+      register: envfile
+    - name: logrotate config
+      copy:
+        dest: '/etc/logrotate.d/service-{{ item }}'
+        content: |
+          /services/{{ item }}/logs/*.log {
+            compress
+            compressoptions "-9"
+            monthly
+            dateext
+            rotate 36
+            nomail
+            noolddir
+            notifempty
+            noshred
+          }
+      with_items:
+        - nginx
+        - '{{ service_name }}'
+        - pg
     - name: get available compose files
       tags: [ always ]
       find:

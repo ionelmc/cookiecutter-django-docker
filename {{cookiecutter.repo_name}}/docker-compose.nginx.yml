@@ -23,10 +23,11 @@ services:
       args:
         REQUIREMENTS: nginx
     volumes:
+      - ./.home/etc:/etc/app
       - ./.home/etc:/shared/${SERVER_NAME}/etc
+      - ./.home/media:/shared/${SERVER_NAME}/media
       - ./.home/run:/shared/${SERVER_NAME}/run
       - ./.home/static:/shared/${SERVER_NAME}/static
-      - ./.home/etc:/etc/app
     depends_on:
       - web
     ports:
