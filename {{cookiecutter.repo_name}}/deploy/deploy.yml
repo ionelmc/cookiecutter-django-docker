@@ -5,15 +5,15 @@
   tasks:
     - name: start registry
       community.docker.docker_compose_v2:
-        project_name: registry
+        project_name: "{{ registry_project }}"
         remove_orphans: yes
         definition: >
           {
             "services": {
-              "{{ service_name }}": {
+              "srv": {
                 "image": "registry:2",
                 "ports": [ "{{ registry_port }}:5000" ],
-                "volumes": [ "{{ playbook_dir }}/../.home/registry:/var/lib/registry" ]
+                "volumes": [ "{{ registry_path }}:/var/lib/registry" ]
               }
             }
           }
@@ -147,13 +147,13 @@
     - name: shutdown registry
       tags: [ cleanup ]
       community.docker.docker_compose_v2:
-        project_name: registry
+        project_name: "{{ registry_project }}"
         state: absent
         remove_orphans: yes
         definition: >
           {
             "services": {
-              "{{ service_name }}": {"image": "registry:2"}
+              "srv": {"image": "registry:2"}
             }
           }
 {%- endraw %}
