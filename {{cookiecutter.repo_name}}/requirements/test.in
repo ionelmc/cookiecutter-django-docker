@@ -10,6 +10,5 @@ django-webtest
 pytest-deadfixtures
 pytest-leaks
 pytest-recording
-respx
 time-machine
 pygments
