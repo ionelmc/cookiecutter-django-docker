@@ -40,11 +40,11 @@
     - name: create service group
       ansible.builtin.group:
         name: service-{{ service_name }}
-        gid: '{{ user_id }}'
+        gid: '{{ uid }}'
     - name: create service user
       ansible.builtin.user:
         name: service-{{ service_name }}
-        uid: '{{ user_id }}'
+        uid: '{{ uid }}'
         group: 'service-{{ service_name }}'
         # if mounting the docker socket
         #groups: [ docker ]
