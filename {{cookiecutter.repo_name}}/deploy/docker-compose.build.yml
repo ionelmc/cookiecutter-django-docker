@@ -18,8 +18,8 @@ services:
       args:
         REQUIREMENTS: base
         DJANGO_SETTINGS_MODULE: ${django_settings_module}
-        USER_ID: ${uid}
-        GROUP_ID: ${uid}
+        USER_ID: ${container_uid}
+        GROUP_ID: ${container_uid}
         SERVER_NAME: ${server_name}
   pg:
     image: ${registry_host}/${service_name}-pg:${app_version}

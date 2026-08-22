@@ -27,7 +27,7 @@
         registry_host: '{{ registry_host }}'
         server_name: '{{ server_name }}'
         service_name: '{{ service_name }}'
-        uid: '{{ uid }}'
+        container_uid: '{{ container_uid }}'
       loop:
         - build
         - push
