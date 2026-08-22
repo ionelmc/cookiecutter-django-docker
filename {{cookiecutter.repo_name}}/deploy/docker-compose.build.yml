@@ -8,6 +8,7 @@ services:
         src-context: ../src
       args:
         REQUIREMENTS: nginx
+        SERVER_NAME: localhost
   python:
     image: ${registry_host}/${service_name}-python:${app_version}
     build:
