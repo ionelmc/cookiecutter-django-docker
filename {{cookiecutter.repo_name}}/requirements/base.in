@@ -37,8 +37,7 @@ hunter
 ipdb
 
 # cron
-yacron
-ruamel.yaml
+cronstable[speedups]
 
 {%- if cookiecutter.worker == 'rq' %}
 # rq worker

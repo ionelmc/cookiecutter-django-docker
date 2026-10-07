@@ -14,6 +14,9 @@ defaults:
   failsWhen:
     producesStdout: false
     producesStderr: false
+web:
+  listen:
+    - http://127.0.0.1:8080
 {% endraw -%}
 jobs:
   - name: {{ cookiecutter.django_command_name }}
