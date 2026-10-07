@@ -388,7 +388,7 @@ if DEBUG_SILK:
 
     MIDDLEWARE = [
         "silk.middleware.SilkyMiddleware",
-        *MIDDLEWARE
+        *MIDDLEWARE,
     ]
     INSTALLED_APPS += [
         "silk",
