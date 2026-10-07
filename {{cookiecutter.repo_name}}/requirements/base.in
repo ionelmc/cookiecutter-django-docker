@@ -4,6 +4,7 @@ django~={{ cookiecutter.__django_version }}
 attrs
 django-admin-utils
 django-crispy-forms
+django-removals
 django-settings-export
 lazy_object_proxy
 niquests[brotli,http3]

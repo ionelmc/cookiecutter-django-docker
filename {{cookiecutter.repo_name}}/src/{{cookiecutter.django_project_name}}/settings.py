@@ -378,6 +378,7 @@ if LOGGING_PATH:
 if DEBUG:
     INSTALLED_APPS += [
         "rosetta",
+        "django_removals",
     ]
 
 if DEBUG_SILK:
@@ -385,7 +386,10 @@ if DEBUG_SILK:
     SILKY_PYTHON_PROFILER = True
     SILKY_PYTHON_PROFILER_BINARY = True
 
-    MIDDLEWARE.insert(0, "silk.middleware.SilkyMiddleware")
+    MIDDLEWARE = [
+        "silk.middleware.SilkyMiddleware",
+        *MIDDLEWARE
+    ]
     INSTALLED_APPS += [
         "silk",
     ]
