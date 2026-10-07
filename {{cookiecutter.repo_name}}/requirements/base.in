@@ -1,4 +1,7 @@
-django~={{ cookiecutter.__django_version }}
+django~={{ cookiecutter.__django_version }}.0
+
+# project deps
+
 
 # bare minimum stuff
 attrs
