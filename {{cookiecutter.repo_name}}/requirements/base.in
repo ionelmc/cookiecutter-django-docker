@@ -4,7 +4,6 @@ django~={{ cookiecutter.__django_version }}.0
 
 
 # bare minimum stuff
-attrs
 django-admin-utils
 django-crispy-forms
 django-removals
