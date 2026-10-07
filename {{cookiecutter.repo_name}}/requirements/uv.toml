@@ -1,0 +1,3 @@
+exclude-dependencies = [
+    "orjson",  # doesn't support parse_float (we don't want niquests to use it)
+]
