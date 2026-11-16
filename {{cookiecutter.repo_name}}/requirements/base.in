@@ -1,7 +1,12 @@
 django~={{ cookiecutter.__django_version }}.0
 
-# project deps
+# connectors
+psycopg[c]
+pymemcache
 
+# container tooling
+holdup
+pysu
 
 # bare minimum stuff
 django-admin-utils
@@ -13,14 +18,6 @@ niquests[brotli,http3]
 python-dateutil
 sentry-sdk
 tzdata
-
-# connectors
-psycopg[c]
-pymemcache
-
-# container tooling
-holdup
-pysu
 
 # django specific debug tooling
 django-debug-toolbar
@@ -52,6 +49,9 @@ celery[redis]
 django-celery-results
 {%- endif %}
 
+# webserver stuff
 uwsgi
 uwsgitop
 django-uwsgi-admin
+
+# project deps
