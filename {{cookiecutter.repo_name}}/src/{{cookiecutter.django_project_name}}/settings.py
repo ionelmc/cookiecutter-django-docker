@@ -150,6 +150,11 @@ CACHES = {
         "KEY_PREFIX": env.get("DJANGO_CACHE_KEY_PREFIX"),
         "LOCATION": env.get("DJANGO_CACHE_LOCATION"),
         "TIMEOUT": env.int("DJANGO_CACHE_TIMEOUT", 0) or None,
+        "OPTIONS": {
+            "no_delay": True,
+            "default_noreply": True,
+            "ignore_exc": not DEBUG,
+        },
     }
 }
 
