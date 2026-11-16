@@ -91,10 +91,14 @@
         content: |
           /services/{{ item }}/logs/*.log {
             compress
-            compressoptions "-9"
-            monthly
+            compresscmd /usr/bin/zstd
+            compressext .zst
+            compressoptions "-3"
+            uncompresscmd /usr/bin/unzstd
+            daily
             dateext
-            rotate 36
+            delaycompress
+            rotate 90
             nomail
             noolddir
             notifempty
